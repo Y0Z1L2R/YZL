@@ -1,0 +1,26 @@
+int trigPin = 13; //set HC-SR04 Trig to Pin 13 in Arduino
+int echoPin = 12; //set HC-SR04 Echo to Pin 12 in Arduino
+float duration, distance; //Set duration and distance as a float
+
+void setup()
+{
+  Serial.begin(9600);   
+  pinMode (trigPin, OUTPUT);  // set trigPin which is Trig as an output 
+  pinMode (echoPin, INPUT);   // set EchoPin which is Echo as an Input 
+  Serial.println("Ultrasonic Sensor HC-SR04 Test");
+  Serial.println("with Arduino UNO R3");
+}
+
+void loop()
+{
+  digitalWrite(trigpin, LOW);  //Clear the trigPin condition 
+  delay(2);
+  digitalWrite(trigPin, HIGH);  //Set the trigPin HIGH (Active) for 10ms 
+  delay(10);
+  digitalWrite(trigpin, LOW);
+  duration= pulse In (echoPin, HIGH); //Read the echoPin, returns the sound wave travel time in microseconds
+  distance = (duration * 0.0343)/2;  //Calculate the distance 
+  Serial.print("Distance: ");
+  Serial.print(distance);
+  Serial.println(" ");
+}
