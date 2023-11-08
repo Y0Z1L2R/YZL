@@ -1,0 +1,35 @@
+//Source// 
+//https://circuitdigest.com/microcontroller-projects/interfacing-ir-sensor-module-with-arduino//
+
+//We first declare two variables as an int and set them as the pin we connected them too 
+
+int IRSensor = 9;   // connect IR sensor module to Arduino pin D9/~9
+int LED = 13;      // connect LED to Arduino pin 13
+
+//Next we made our setup function to test wheter the IR sensor is working
+
+void setup()
+{
+  Serial.begin(115200); // Init Serial at 115200 Baud Rate.
+  Serial.println("Serial Working"); // Test to check if serial is working or not
+  pinMode(IRSensor, INPUT); // IR Sensor pin INPUT
+  pinMode(LED, OUTPUT); // LED Pin Output
+}
+
+// Finally, in the infinite loop, we use to check if the output generated is high or low, if the ouput is high it means there are no motion and vice versa
+
+void loop()
+{
+  int sensorStatus = digitalRead(IRSensor); // Set the GPIO as Input
+  if (sensorStatus == 1) // Check if the pin high or not
+  {
+    // if the pin is high turn off the onboard Led
+    digitalWrite(LED, LOW); // LED LOW
+    Serial.println("Motion Detected!"); // print Motion Detected! on the serial monitor window
+  }
+  else  {
+    //else turn on the onboard LED
+    digitalWrite(LED, HIGH); // LED High
+    Serial.println("Motion Ended!"); // print Motion Ended! on the serial monitor window
+  }
+}
